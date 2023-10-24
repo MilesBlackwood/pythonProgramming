@@ -39,9 +39,10 @@ def similarity_grouping(data: list) -> list:
 
 
 def highest_count_items(data: str) -> list:
-    items = data.split(", ")
+    items = data.split(",")
     itemCount = []
     for item in items:
+        item = item.strip() # removes any whitespace
         added = False
         for i in itemCount: #iterates through each appearance in itemCount
             if item == i[0]: # checks if item is already in itemCount
@@ -50,17 +51,57 @@ def highest_count_items(data: str) -> list:
                 break
         if added == False:
             itemCount.append([item, 1])
-    print(itemCount)
+    
+    highestCount = 0
+    indexofHighests = []
+    for items in enumerate(itemCount):
+        if items[1][1] > highestCount: # resets what the highest appearance is
+            indexofHighests.clear()
+            highestCount = items[1][1]
+            indexofHighests.append(items[0])
+        
+        elif items[1][1] == highestCount: # occurs if multiple items appear the most the samle amount of times
+            indexofHighests.append(items[0])
+        
+        else:
+            pass
+
+    maxAppearences = []
+    for indexes in indexofHighests:
+        maxAppearences.append(itemCount[indexes]) # adds the respective items coresponding to their indexes to the final list
+
+    return maxAppearences
+
+
+
 
 
 def valid_char_in_string(popList: list, charSet: list) -> bool:
-    # delete this line and pass to write your code here
-    pass
+    if isinstance(charSet, list):
+        for char in charSet:
+            if len(char) != 1:
+                return False # invalid character set - list doesn't contain individual characters
+        for string in popList:
+            for char in string:
+                inSet = False
+                for item in charSet:
+                    if char == item:
+                        inSet = True
+                if inSet == False:
+                    return False # Not all characters are in the character set
+        return True # All characters in each string are in the character set
+    else:
+        return False # invalid character set - not a list
 
 
 def total_price(unit: int) -> float:
-    # delete this line and pass to write your code here
-    pass
+    
+    sixPacks = unit // 6 # integer division on unit
+    singleUnits = unit % 6 # finds remainder of integer division
+    total = (sixPacks * 5) + (singleUnits * 1.25) # finds total price of purchase
+    if total >= 20: # applies discount if greater than or equal to £20
+        total = total * 0.9 # 10% discount applied
+    return total
 
 
 if __name__ == "__main__":
