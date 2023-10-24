@@ -23,13 +23,34 @@ def valid_puzzle(puzzle: list) -> bool:
 
 
 def similarity_grouping(data: list) -> list:
-    # delete this line and pass to write your code here
-    pass
+    groupedArray = [] # initialising an array to store the groups of data in
+    for element in data: # iterates through each element within the first array
+        grouped = False # Setting up a boolean so I can tell whether an item has been placed into a group yet.
+        for group in groupedArray:
+            if element in group:
+                group.append(element)
+                grouped = True
+                break
+        if grouped == False: # if no existing group for that element a new group is created in the groupedArray
+            groupedArray.append([element])
+    return groupedArray
+
+
 
 
 def highest_count_items(data: str) -> list:
-    # delete this line and pass to write your code here
-    pass
+    items = data.split(", ")
+    itemCount = []
+    for item in items:
+        added = False
+        for i in itemCount: #iterates through each appearance in itemCount
+            if item == i[0]: # checks if item is already in itemCount
+                i[1] += 1 # adds one to the times it has apeared
+                added = True
+                break
+        if added == False:
+            itemCount.append([item, 1])
+    print(itemCount)
 
 
 def valid_char_in_string(popList: list, charSet: list) -> bool:
