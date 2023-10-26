@@ -28,12 +28,10 @@ def string_to_morse_code(x):
         # so it can be checked against the mcode
         morseString = ""
         for char in x:
-            if char == " ":
-                morseString += "x"
-            else:
-                morseString += mcode[char]
-            morseString += "x"
+            morseString += mcode[char] + "x"
         morseString = morseString[:len(morseString)-1]
         # removes the extra x at the end of the string
 
     return morseString
+
+print(string_to_morse_code("Hello World!"))
