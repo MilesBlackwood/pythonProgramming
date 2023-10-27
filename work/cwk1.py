@@ -6,101 +6,123 @@ Introduction to Programming Coursework 1
 
 
 def valid_puzzle(puzzle: list) -> bool:
-    if isinstance(puzzle, list) and isinstance(puzzle[0], str): # Checks if the inputed puzzle is a list - returns True if so
-        initialLength = len(puzzle[0]) # After checking if the first item is actually a string it stores its length to compare other strings against
-
-        for item in puzzle: # iterates through each item in the puzzle list
+    if isinstance(puzzle, list) and isinstance(puzzle[0], str):
+        # Checks if the inputed
+        # puzzle is a list - returns True if so
+        initialLength = len(puzzle[0])
+        # After checking if the first item is
+        # actually a string it stores its length to
+        # compare other strings against
+        for item in puzzle:
+            # iterates through each item in the puzzle list
             if isinstance(item, str) and len(item) == initialLength:
-                pass #Cleared the check, moves onto next item in list
-
+                pass
+                # Cleared the check, moves onto next item in list
             else:
-                return False #Didn't clear the check so puzzle is not valid
-            
-        return True # If all items in the list clear the check returns true.
-
+                return False
+                # Didn't clear the check so puzzle is not valid
+        return True
+        # If all items in the list clear the check returns true.
     else:
-        return False # inputed puzzle is not a list
+        return False
+        # inputed puzzle is not a list
 
 
 def similarity_grouping(data: list) -> list:
-    groupedArray = [] # initialising an array to store the groups of data in
-    for element in data: # iterates through each element within the first array
-        grouped = False # Setting up a boolean so I can tell whether an item has been placed into a group yet.
+    groupedArray = []
+    # initialising an array to store the groups of data in
+    for element in data:
+        # iterates through each element within the first array
+        grouped = False
+        # Setting up a boolean so I can tell
+        # whether an item has been placed into a group yet.
         for group in groupedArray:
-            if element in group:
+            if str(element) in str(group):
                 group.append(element)
                 grouped = True
                 break
-        if grouped == False: # if no existing group for that element a new group is created in the groupedArray
+        if not grouped:
+            # if no existing group for that
+            # element a new group is created in the groupedArray
             groupedArray.append([element])
     return groupedArray
-
-
 
 
 def highest_count_items(data: str) -> list:
     items = data.split(",")
     itemCount = []
     for item in items:
-        item = item.strip() # removes any whitespace
+        item = item.strip()
+        # removes any whitespace
         added = False
-        for i in itemCount: #iterates through each appearance in itemCount
-            if item == i[0]: # checks if item is already in itemCount
-                i[1] += 1 # adds one to the times it has apeared
+        for i in itemCount:
+            # iterates through each appearance in itemCount
+            if item == i[0]:
+                # checks if item is already in itemCount
+                i[1] += 1
+                # adds one to the times it has apeared
                 added = True
                 break
-        if added == False:
+        if not added:
             itemCount.append([item, 1])
-    
     highestCount = 0
     indexofHighests = []
     for items in enumerate(itemCount):
-        if items[1][1] > highestCount: # resets what the highest appearance is
+        if items[1][1] > highestCount:
+            # resets what the highest appearance is
             indexofHighests.clear()
             highestCount = items[1][1]
             indexofHighests.append(items[0])
-        
-        elif items[1][1] == highestCount: # occurs if multiple items appear the most the samle amount of times
+        elif items[1][1] == highestCount:
+            # occurs if multiple items
+            # appear the most the samle amount of times
             indexofHighests.append(items[0])
-        
         else:
             pass
-
     maxAppearences = []
     for indexes in indexofHighests:
-        maxAppearences.append(itemCount[indexes]) # adds the respective items coresponding to their indexes to the final list
-
+        maxAppearences.append(itemCount[indexes])
+        # adds the respective
+        # items coresponding to their indexes to the final list
     return maxAppearences
-
-
-
 
 
 def valid_char_in_string(popList: list, charSet: list) -> bool:
     if isinstance(charSet, list):
         for char in charSet:
             if len(char) != 1:
-                return False # invalid character set - list doesn't contain individual characters
+                return False
+            # invalid character set
+            # list doesn't contain individual characters
         for string in popList:
             for char in string:
                 inSet = False
                 for item in charSet:
                     if char == item:
                         inSet = True
-                if inSet == False:
-                    return False # Not all characters are in the character set
-        return True # All characters in each string are in the character set
+                if not inSet:
+                    return False
+                # Not all characters
+                # are in the character set
+        return True
+        # All characters in each
+        # string are in the character set
     else:
-        return False # invalid character set - not a list
+        return False
+        # invalid character set - not a list
 
 
 def total_price(unit: int) -> float:
-    
-    sixPacks = unit // 6 # integer division on unit
-    singleUnits = unit % 6 # finds remainder of integer division
-    total = (sixPacks * 5) + (singleUnits * 1.25) # finds total price of purchase
-    if total >= 20: # applies discount if greater than or equal to £20
-        total = total * 0.9 # 10% discount applied
+    sixPacks = unit // 6
+    # integer division on unit
+    singleUnits = unit % 6
+    # finds remainder of integer division
+    total = (sixPacks * 5) + (singleUnits * 1.25)
+    # finds total price of purchase
+    if total >= 20:
+        # applies discount if greater than or equal to £20
+        total = total * 0.9
+        # 10% discount applied
     return total
 
 
@@ -173,3 +195,4 @@ if __name__ == "__main__":
     print(total_price(12))
     print(total_price(15))
     print(total_price(26))
+    
